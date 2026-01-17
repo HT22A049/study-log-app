@@ -10,9 +10,27 @@ const logs = [{
 	"message": "test"
 }];
 
+// JSON を受け取る設定
+app.use(express.json())
+
 // エンドポイントの作成
 app.get('/logs', (req, res) => {
 	res.json(logs)
+})
+
+// logs のエンドポイント
+app.post('/logs', (req, res) => {
+	if (!req.body.message) {
+		return res.status(400).json({error: 'message is required'});
+	}
+
+	const newLog = {
+		id: logs.length + 1,
+		...req.body
+	};
+
+	logs.push(newLog);
+	res.json(newLog);
 })
 
 // ポート番号3000でサーバーを起動
