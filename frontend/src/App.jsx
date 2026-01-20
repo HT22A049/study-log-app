@@ -3,8 +3,20 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+async function PostResponse(message) {
+  const response = await fetch('http://localhost:3000/logs', {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json',
+    },
+    body: JSON.stringify({
+      message: message,
+    }),
+  })
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [message, setMessage] = useState('');
 
   return (
     <>
@@ -18,9 +30,10 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+          <input type="text" name="text[]" class="text" onChange={(e) => 
+            setMessage(e.target.value)}></input> 
+          <button type="button" onClick={() => 
+            PostResponse(message)}> 送信 </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>

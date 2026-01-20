@@ -3,12 +3,17 @@ const express = require('express')
 // ポート番号の指定
 const PORT = process.env.PORT || 3000;
 
+const cors = require('cors');
+
 const app = express();
 
 const logs = [{
 	"id": 1,
 	"message": "test"
 }];
+
+// cors という middleware を追加
+app.use(cors())
 
 // JSON を受け取る設定
 app.use(express.json())
