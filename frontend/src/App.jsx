@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -17,6 +17,18 @@ async function PostResponse(message) {
 
 function App() {
   const [message, setMessage] = useState('');
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    const fetchLogs = async () => {
+      const response = await fetch('http://localhost:3000/logs');
+      const date = await response.json();
+      setLogs(date);
+      console.log(date);
+    };
+
+    fetchLogs();
+  }, []);
 
   return (
     <>
@@ -30,7 +42,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-          <input type="text" name="text[]" class="text" onChange={(e) => 
+          <input type="text" name="text[]" className="text" onChange={(e) => 
             setMessage(e.target.value)}></input> 
           <button type="button" onClick={() => 
             PostResponse(message)}> 送信 </button>
