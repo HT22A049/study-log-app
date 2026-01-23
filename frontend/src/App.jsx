@@ -43,12 +43,19 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
           <input type="text" name="text[]" className="text" onChange={(e) => 
-            setMessage(e.target.value)}></input> 
+            setMessage(e.target.value)}>
+          </input> 
           <button type="button" onClick={() => 
-            PostResponse(message)}> 送信 </button>
+            PostResponse(message)}> 送信
+          </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
+      </div>
+      <div>
+        {logs.map((log) => (
+          <p key={log.id}>{log.message}</p>
+        ))}
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
